@@ -1,0 +1,1356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="frase_aluModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="botchat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="request" Type="int" Nullable="false" />
+          <Property Name="id_usuari" Type="int" Nullable="false" />
+          <Property Name="mensaje" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="actiu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cursos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="curs_inici" Type="int" Nullable="false" />
+          <Property Name="curs_fi" Type="int" Nullable="false" />
+          <Property Name="actiu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="inici" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tasca" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="formacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="grups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grups_has_alumnes">
+          <Key>
+            <PropertyRef Name="grups_id" />
+            <PropertyRef Name="usuaris_id" />
+            <PropertyRef Name="curs_id" />
+          </Key>
+          <Property Name="grups_id" Type="int" Nullable="false" />
+          <Property Name="usuaris_id" Type="int" Nullable="false" />
+          <Property Name="curs_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grups_has_docents">
+          <Key>
+            <PropertyRef Name="grups_id" />
+            <PropertyRef Name="usuaris_id" />
+            <PropertyRef Name="curs_id" />
+          </Key>
+          <Property Name="grups_id" Type="int" Nullable="false" />
+          <Property Name="usuaris_id" Type="int" Nullable="false" />
+          <Property Name="curs_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grups_has_horaris">
+          <Key>
+            <PropertyRef Name="id_grups" />
+            <PropertyRef Name="id_horari" />
+            <PropertyRef Name="id_dias" />
+          </Key>
+          <Property Name="id_grups" Type="int" Nullable="false" />
+          <Property Name="id_horari" Type="int" Nullable="false" />
+          <Property Name="id_dias" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grups_has_llistes_skills">
+          <Key>
+            <PropertyRef Name="grups_id" />
+            <PropertyRef Name="llistes_skills_id" />
+            <PropertyRef Name="curs_id" />
+          </Key>
+          <Property Name="grups_id" Type="int" Nullable="false" />
+          <Property Name="llistes_skills_id" Type="int" Nullable="false" />
+          <Property Name="curs_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="horari">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="imatge_usuari">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuari" Type="int" Nullable="false" />
+          <Property Name="imatge_nom" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="kpis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="skills_id" Type="int" Nullable="false" />
+          <Property Name="actiu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="llistes_skills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="actiu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="missatges">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="asumpte" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cos" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="id_usuari" Type="int" Nullable="false" />
+          <Property Name="id_grup" Type="int" Nullable="false" />
+          <Property Name="data" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rols">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="actiu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="skills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="llistes_skills_id" Type="int" Nullable="false" />
+          <Property Name="actiu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuaris">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rols_id" Type="int" Nullable="false" />
+          <Property Name="actiu" Type="bit" Nullable="false" />
+          <Property Name="correu" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrasenia" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="any_naixement" Type="int" />
+          <Property Name="telefono" Type="varchar" MaxLength="9" />
+          <Property Name="dni" Type="varchar" MaxLength="9" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
+          <Property Name="id_formacio" Type="int" />
+        </EntityType>
+        <EntityType Name="valoracions">
+          <Key>
+            <PropertyRef Name="kpis_id" />
+            <PropertyRef Name="usuari_valorat_id" />
+            <PropertyRef Name="usuari_pp_id" />
+            <PropertyRef Name="data" />
+          </Key>
+          <Property Name="kpis_id" Type="int" Nullable="false" />
+          <Property Name="usuari_valorat_id" Type="int" Nullable="false" />
+          <Property Name="usuari_pp_id" Type="int" Nullable="false" />
+          <Property Name="data" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nota" Type="int" Nullable="false" />
+          <Property Name="observacions" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <Association Name="FK_botchat_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="botchat" Type="Self.botchat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="botchat">
+              <PropertyRef Name="id_usuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_alumnes_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="grups_has_alumnes" Type="Self.grups_has_alumnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_alumnes">
+              <PropertyRef Name="curs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_alumnes_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="grups_has_alumnes" Type="Self.grups_has_alumnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_alumnes">
+              <PropertyRef Name="grups_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_alumnes_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="grups_has_alumnes" Type="Self.grups_has_alumnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_alumnes">
+              <PropertyRef Name="usuaris_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_docents_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="grups_has_docents" Type="Self.grups_has_docents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_docents">
+              <PropertyRef Name="curs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_docents_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="grups_has_docents" Type="Self.grups_has_docents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_docents">
+              <PropertyRef Name="grups_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_docents_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="grups_has_docents" Type="Self.grups_has_docents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_docents">
+              <PropertyRef Name="usuaris_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_horaris_horari">
+          <End Role="horari" Type="Self.horari" Multiplicity="1" />
+          <End Role="grups_has_horaris" Type="Self.grups_has_horaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horari">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_horaris">
+              <PropertyRef Name="id_horari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_llistes_skills_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="grups_has_llistes_skills" Type="Self.grups_has_llistes_skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_llistes_skills">
+              <PropertyRef Name="curs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_llistes_skills_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="grups_has_llistes_skills" Type="Self.grups_has_llistes_skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_llistes_skills">
+              <PropertyRef Name="grups_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_llistes_skills_llistes_skills">
+          <End Role="llistes_skills" Type="Self.llistes_skills" Multiplicity="1" />
+          <End Role="grups_has_llistes_skills" Type="Self.grups_has_llistes_skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="llistes_skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_llistes_skills">
+              <PropertyRef Name="llistes_skills_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_horaris_dias">
+          <End Role="dias" Type="Self.dias" Multiplicity="1" />
+          <End Role="grups_has_horaris" Type="Self.grups_has_horaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_horaris">
+              <PropertyRef Name="id_dias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_horaris_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="grups_has_horaris" Type="Self.grups_has_horaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_horaris">
+              <PropertyRef Name="id_grups" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imatge_usuari_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="imatge_usuari" Type="Self.imatge_usuari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="imatge_usuari">
+              <PropertyRef Name="id_usuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kpis_skills">
+          <End Role="skills" Type="Self.skills" Multiplicity="1" />
+          <End Role="kpis" Type="Self.kpis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kpis">
+              <PropertyRef Name="skills_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_missatges_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="missatges" Type="Self.missatges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="missatges">
+              <PropertyRef Name="id_grup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_missatges_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="missatges" Type="Self.missatges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="missatges">
+              <PropertyRef Name="id_usuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_skills_llistes_skills">
+          <End Role="llistes_skills" Type="Self.llistes_skills" Multiplicity="1" />
+          <End Role="skills" Type="Self.skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="llistes_skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="llistes_skills_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuaris_formacion">
+          <End Role="formacion" Type="Self.formacion" Multiplicity="0..1" />
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="formacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuaris">
+              <PropertyRef Name="id_formacio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuaris_rols">
+          <End Role="rols" Type="Self.rols" Multiplicity="1" />
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rols">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuaris">
+              <PropertyRef Name="rols_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_valoracions_kpis">
+          <End Role="kpis" Type="Self.kpis" Multiplicity="1" />
+          <End Role="valoracions" Type="Self.valoracions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kpis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="valoracions">
+              <PropertyRef Name="kpis_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_valoracions_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="valoracions" Type="Self.valoracions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="valoracions">
+              <PropertyRef Name="usuari_valorat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="frase_aluModelStoreContainer">
+          <EntitySet Name="botchat" EntityType="Self.botchat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cursos" EntityType="Self.cursos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dias" EntityType="Self.dias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="formacion" EntityType="Self.formacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grups" EntityType="Self.grups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grups_has_alumnes" EntityType="Self.grups_has_alumnes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grups_has_docents" EntityType="Self.grups_has_docents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grups_has_horaris" EntityType="Self.grups_has_horaris" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grups_has_llistes_skills" EntityType="Self.grups_has_llistes_skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="horari" EntityType="Self.horari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imatge_usuari" EntityType="Self.imatge_usuari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kpis" EntityType="Self.kpis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="llistes_skills" EntityType="Self.llistes_skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="missatges" EntityType="Self.missatges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rols" EntityType="Self.rols" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="skills" EntityType="Self.skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuaris" EntityType="Self.usuaris" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="valoracions" EntityType="Self.valoracions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_botchat_usuaris" Association="Self.FK_botchat_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="botchat" EntitySet="botchat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_alumnes_cursos" Association="Self.FK_grups_has_alumnes_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="grups_has_alumnes" EntitySet="grups_has_alumnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_alumnes_grups" Association="Self.FK_grups_has_alumnes_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="grups_has_alumnes" EntitySet="grups_has_alumnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_alumnes_usuaris" Association="Self.FK_grups_has_alumnes_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="grups_has_alumnes" EntitySet="grups_has_alumnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_docents_cursos" Association="Self.FK_grups_has_docents_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="grups_has_docents" EntitySet="grups_has_docents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_docents_grups" Association="Self.FK_grups_has_docents_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="grups_has_docents" EntitySet="grups_has_docents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_docents_usuaris" Association="Self.FK_grups_has_docents_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="grups_has_docents" EntitySet="grups_has_docents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_horaris_horari" Association="Self.FK_grups_has_horaris_horari">
+            <End Role="horari" EntitySet="horari" />
+            <End Role="grups_has_horaris" EntitySet="grups_has_horaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_llistes_skills_cursos" Association="Self.FK_grups_has_llistes_skills_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="grups_has_llistes_skills" EntitySet="grups_has_llistes_skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_llistes_skills_grups" Association="Self.FK_grups_has_llistes_skills_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="grups_has_llistes_skills" EntitySet="grups_has_llistes_skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_llistes_skills_llistes_skills" Association="Self.FK_grups_has_llistes_skills_llistes_skills">
+            <End Role="llistes_skills" EntitySet="llistes_skills" />
+            <End Role="grups_has_llistes_skills" EntitySet="grups_has_llistes_skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_horaris_dias" Association="Self.FK_horaris_dias">
+            <End Role="dias" EntitySet="dias" />
+            <End Role="grups_has_horaris" EntitySet="grups_has_horaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_horaris_grups" Association="Self.FK_horaris_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="grups_has_horaris" EntitySet="grups_has_horaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imatge_usuari_usuaris" Association="Self.FK_imatge_usuari_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="imatge_usuari" EntitySet="imatge_usuari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kpis_skills" Association="Self.FK_kpis_skills">
+            <End Role="skills" EntitySet="skills" />
+            <End Role="kpis" EntitySet="kpis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_missatges_grups" Association="Self.FK_missatges_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="missatges" EntitySet="missatges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_missatges_usuaris" Association="Self.FK_missatges_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="missatges" EntitySet="missatges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_skills_llistes_skills" Association="Self.FK_skills_llistes_skills">
+            <End Role="llistes_skills" EntitySet="llistes_skills" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuaris_formacion" Association="Self.FK_usuaris_formacion">
+            <End Role="formacion" EntitySet="formacion" />
+            <End Role="usuaris" EntitySet="usuaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuaris_rols" Association="Self.FK_usuaris_rols">
+            <End Role="rols" EntitySet="rols" />
+            <End Role="usuaris" EntitySet="usuaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_valoracions_kpis" Association="Self.FK_valoracions_kpis">
+            <End Role="kpis" EntitySet="kpis" />
+            <End Role="valoracions" EntitySet="valoracions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_valoracions_usuaris" Association="Self.FK_valoracions_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="valoracions" EntitySet="valoracions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="frase_aluModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="botchat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="request" Type="Int32" Nullable="false" />
+          <Property Name="id_usuari" Type="Int32" Nullable="false" />
+          <Property Name="mensaje" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="actiu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="usuaris" Relationship="Self.FK_botchat_usuaris" FromRole="botchat" ToRole="usuaris" />
+        </EntityType>
+        <EntityType Name="cursos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="curs_inici" Type="Int32" Nullable="false" />
+          <Property Name="curs_fi" Type="Int32" Nullable="false" />
+          <Property Name="actiu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="grups_has_alumnes" Relationship="Self.FK_grups_has_alumnes_cursos" FromRole="cursos" ToRole="grups_has_alumnes" />
+          <NavigationProperty Name="grups_has_docents" Relationship="Self.FK_grups_has_docents_cursos" FromRole="cursos" ToRole="grups_has_docents" />
+          <NavigationProperty Name="grups_has_llistes_skills" Relationship="Self.FK_grups_has_llistes_skills_cursos" FromRole="cursos" ToRole="grups_has_llistes_skills" />
+        </EntityType>
+        <EntityType Name="dias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="inici" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tasca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="grups_has_horaris" Relationship="Self.FK_horaris_dias" FromRole="dias" ToRole="grups_has_horaris" />
+        </EntityType>
+        <EntityType Name="formacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuaris" Relationship="Self.FK_usuaris_formacion" FromRole="formacion" ToRole="usuaris" />
+        </EntityType>
+        <EntityType Name="grups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="grups_has_alumnes" Relationship="Self.FK_grups_has_alumnes_grups" FromRole="grups" ToRole="grups_has_alumnes" />
+          <NavigationProperty Name="grups_has_docents" Relationship="Self.FK_grups_has_docents_grups" FromRole="grups" ToRole="grups_has_docents" />
+          <NavigationProperty Name="grups_has_llistes_skills" Relationship="Self.FK_grups_has_llistes_skills_grups" FromRole="grups" ToRole="grups_has_llistes_skills" />
+          <NavigationProperty Name="grups_has_horaris" Relationship="Self.FK_horaris_grups" FromRole="grups" ToRole="grups_has_horaris" />
+          <NavigationProperty Name="missatges" Relationship="Self.FK_missatges_grups" FromRole="grups" ToRole="missatges" />
+        </EntityType>
+        <EntityType Name="grups_has_alumnes">
+          <Key>
+            <PropertyRef Name="grups_id" />
+            <PropertyRef Name="usuaris_id" />
+            <PropertyRef Name="curs_id" />
+          </Key>
+          <Property Name="grups_id" Type="Int32" Nullable="false" />
+          <Property Name="usuaris_id" Type="Int32" Nullable="false" />
+          <Property Name="curs_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cursos" Relationship="Self.FK_grups_has_alumnes_cursos" FromRole="grups_has_alumnes" ToRole="cursos" />
+          <NavigationProperty Name="grups" Relationship="Self.FK_grups_has_alumnes_grups" FromRole="grups_has_alumnes" ToRole="grups" />
+          <NavigationProperty Name="usuaris" Relationship="Self.FK_grups_has_alumnes_usuaris" FromRole="grups_has_alumnes" ToRole="usuaris" />
+        </EntityType>
+        <EntityType Name="grups_has_docents">
+          <Key>
+            <PropertyRef Name="grups_id" />
+            <PropertyRef Name="usuaris_id" />
+            <PropertyRef Name="curs_id" />
+          </Key>
+          <Property Name="grups_id" Type="Int32" Nullable="false" />
+          <Property Name="usuaris_id" Type="Int32" Nullable="false" />
+          <Property Name="curs_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cursos" Relationship="Self.FK_grups_has_docents_cursos" FromRole="grups_has_docents" ToRole="cursos" />
+          <NavigationProperty Name="grups" Relationship="Self.FK_grups_has_docents_grups" FromRole="grups_has_docents" ToRole="grups" />
+          <NavigationProperty Name="usuaris" Relationship="Self.FK_grups_has_docents_usuaris" FromRole="grups_has_docents" ToRole="usuaris" />
+        </EntityType>
+        <EntityType Name="grups_has_horaris">
+          <Key>
+            <PropertyRef Name="id_grups" />
+            <PropertyRef Name="id_horari" />
+            <PropertyRef Name="id_dias" />
+          </Key>
+          <Property Name="id_grups" Type="Int32" Nullable="false" />
+          <Property Name="id_horari" Type="Int32" Nullable="false" />
+          <Property Name="id_dias" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dias" Relationship="Self.FK_horaris_dias" FromRole="grups_has_horaris" ToRole="dias" />
+          <NavigationProperty Name="grups" Relationship="Self.FK_horaris_grups" FromRole="grups_has_horaris" ToRole="grups" />
+          <NavigationProperty Name="horari" Relationship="Self.FK_grups_has_horaris_horari" FromRole="grups_has_horaris" ToRole="horari" />
+        </EntityType>
+        <EntityType Name="grups_has_llistes_skills">
+          <Key>
+            <PropertyRef Name="grups_id" />
+            <PropertyRef Name="llistes_skills_id" />
+            <PropertyRef Name="curs_id" />
+          </Key>
+          <Property Name="grups_id" Type="Int32" Nullable="false" />
+          <Property Name="llistes_skills_id" Type="Int32" Nullable="false" />
+          <Property Name="curs_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cursos" Relationship="Self.FK_grups_has_llistes_skills_cursos" FromRole="grups_has_llistes_skills" ToRole="cursos" />
+          <NavigationProperty Name="grups" Relationship="Self.FK_grups_has_llistes_skills_grups" FromRole="grups_has_llistes_skills" ToRole="grups" />
+          <NavigationProperty Name="llistes_skills" Relationship="Self.FK_grups_has_llistes_skills_llistes_skills" FromRole="grups_has_llistes_skills" ToRole="llistes_skills" />
+        </EntityType>
+        <EntityType Name="horari">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="grups_has_horaris" Relationship="Self.FK_grups_has_horaris_horari" FromRole="horari" ToRole="grups_has_horaris" />
+        </EntityType>
+        <EntityType Name="imatge_usuari">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuari" Type="Int32" Nullable="false" />
+          <Property Name="imatge_nom" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuaris" Relationship="Self.FK_imatge_usuari_usuaris" FromRole="imatge_usuari" ToRole="usuaris" />
+        </EntityType>
+        <EntityType Name="kpis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="skills_id" Type="Int32" Nullable="false" />
+          <Property Name="actiu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="skills" Relationship="Self.FK_kpis_skills" FromRole="kpis" ToRole="skills" />
+          <NavigationProperty Name="valoracions" Relationship="Self.FK_valoracions_kpis" FromRole="kpis" ToRole="valoracions" />
+        </EntityType>
+        <EntityType Name="llistes_skills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="actiu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="grups_has_llistes_skills" Relationship="Self.FK_grups_has_llistes_skills_llistes_skills" FromRole="llistes_skills" ToRole="grups_has_llistes_skills" />
+          <NavigationProperty Name="skills" Relationship="Self.FK_skills_llistes_skills" FromRole="llistes_skills" ToRole="skills" />
+        </EntityType>
+        <EntityType Name="missatges">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="asumpte" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_usuari" Type="Int32" Nullable="false" />
+          <Property Name="id_grup" Type="Int32" Nullable="false" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="grups" Relationship="Self.FK_missatges_grups" FromRole="missatges" ToRole="grups" />
+          <NavigationProperty Name="usuaris" Relationship="Self.FK_missatges_usuaris" FromRole="missatges" ToRole="usuaris" />
+        </EntityType>
+        <EntityType Name="rols">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="actiu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="usuaris" Relationship="Self.FK_usuaris_rols" FromRole="rols" ToRole="usuaris" />
+        </EntityType>
+        <EntityType Name="skills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="llistes_skills_id" Type="Int32" Nullable="false" />
+          <Property Name="actiu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="kpis" Relationship="Self.FK_kpis_skills" FromRole="skills" ToRole="kpis" />
+          <NavigationProperty Name="llistes_skills" Relationship="Self.FK_skills_llistes_skills" FromRole="skills" ToRole="llistes_skills" />
+        </EntityType>
+        <EntityType Name="usuaris">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rols_id" Type="Int32" Nullable="false" />
+          <Property Name="actiu" Type="Boolean" Nullable="false" />
+          <Property Name="correu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasenia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="any_naixement" Type="Int32" />
+          <Property Name="telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="dni" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_formacio" Type="Int32" />
+          <NavigationProperty Name="botchat" Relationship="Self.FK_botchat_usuaris" FromRole="usuaris" ToRole="botchat" />
+          <NavigationProperty Name="formacion" Relationship="Self.FK_usuaris_formacion" FromRole="usuaris" ToRole="formacion" />
+          <NavigationProperty Name="grups_has_alumnes" Relationship="Self.FK_grups_has_alumnes_usuaris" FromRole="usuaris" ToRole="grups_has_alumnes" />
+          <NavigationProperty Name="grups_has_docents" Relationship="Self.FK_grups_has_docents_usuaris" FromRole="usuaris" ToRole="grups_has_docents" />
+          <NavigationProperty Name="imatge_usuari" Relationship="Self.FK_imatge_usuari_usuaris" FromRole="usuaris" ToRole="imatge_usuari" />
+          <NavigationProperty Name="missatges" Relationship="Self.FK_missatges_usuaris" FromRole="usuaris" ToRole="missatges" />
+          <NavigationProperty Name="rols" Relationship="Self.FK_usuaris_rols" FromRole="usuaris" ToRole="rols" />
+          <NavigationProperty Name="valoracions" Relationship="Self.FK_valoracions_usuaris" FromRole="usuaris" ToRole="valoracions" />
+        </EntityType>
+        <EntityType Name="valoracions">
+          <Key>
+            <PropertyRef Name="kpis_id" />
+            <PropertyRef Name="usuari_valorat_id" />
+            <PropertyRef Name="usuari_pp_id" />
+            <PropertyRef Name="data" />
+          </Key>
+          <Property Name="kpis_id" Type="Int32" Nullable="false" />
+          <Property Name="usuari_valorat_id" Type="Int32" Nullable="false" />
+          <Property Name="usuari_pp_id" Type="Int32" Nullable="false" />
+          <Property Name="data" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nota" Type="Int32" Nullable="false" />
+          <Property Name="observacions" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="kpis" Relationship="Self.FK_valoracions_kpis" FromRole="valoracions" ToRole="kpis" />
+          <NavigationProperty Name="usuaris" Relationship="Self.FK_valoracions_usuaris" FromRole="valoracions" ToRole="usuaris" />
+        </EntityType>
+        <Association Name="FK_botchat_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="botchat" Type="Self.botchat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="botchat">
+              <PropertyRef Name="id_usuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_alumnes_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="grups_has_alumnes" Type="Self.grups_has_alumnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_alumnes">
+              <PropertyRef Name="curs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_docents_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="grups_has_docents" Type="Self.grups_has_docents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_docents">
+              <PropertyRef Name="curs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_llistes_skills_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="grups_has_llistes_skills" Type="Self.grups_has_llistes_skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_llistes_skills">
+              <PropertyRef Name="curs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_horaris_dias">
+          <End Role="dias" Type="Self.dias" Multiplicity="1" />
+          <End Role="grups_has_horaris" Type="Self.grups_has_horaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_horaris">
+              <PropertyRef Name="id_dias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuaris_formacion">
+          <End Role="formacion" Type="Self.formacion" Multiplicity="0..1" />
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="formacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuaris">
+              <PropertyRef Name="id_formacio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_alumnes_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="grups_has_alumnes" Type="Self.grups_has_alumnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_alumnes">
+              <PropertyRef Name="grups_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_docents_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="grups_has_docents" Type="Self.grups_has_docents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_docents">
+              <PropertyRef Name="grups_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_llistes_skills_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="grups_has_llistes_skills" Type="Self.grups_has_llistes_skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_llistes_skills">
+              <PropertyRef Name="grups_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_horaris_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="grups_has_horaris" Type="Self.grups_has_horaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_horaris">
+              <PropertyRef Name="id_grups" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_missatges_grups">
+          <End Role="grups" Type="Self.grups" Multiplicity="1" />
+          <End Role="missatges" Type="Self.missatges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="missatges">
+              <PropertyRef Name="id_grup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_alumnes_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="grups_has_alumnes" Type="Self.grups_has_alumnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_alumnes">
+              <PropertyRef Name="usuaris_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_docents_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="grups_has_docents" Type="Self.grups_has_docents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_docents">
+              <PropertyRef Name="usuaris_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_horaris_horari">
+          <End Role="horari" Type="Self.horari" Multiplicity="1" />
+          <End Role="grups_has_horaris" Type="Self.grups_has_horaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horari">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_horaris">
+              <PropertyRef Name="id_horari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grups_has_llistes_skills_llistes_skills">
+          <End Role="llistes_skills" Type="Self.llistes_skills" Multiplicity="1" />
+          <End Role="grups_has_llistes_skills" Type="Self.grups_has_llistes_skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="llistes_skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grups_has_llistes_skills">
+              <PropertyRef Name="llistes_skills_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imatge_usuari_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="imatge_usuari" Type="Self.imatge_usuari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="imatge_usuari">
+              <PropertyRef Name="id_usuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kpis_skills">
+          <End Role="skills" Type="Self.skills" Multiplicity="1" />
+          <End Role="kpis" Type="Self.kpis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kpis">
+              <PropertyRef Name="skills_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_valoracions_kpis">
+          <End Role="kpis" Type="Self.kpis" Multiplicity="1" />
+          <End Role="valoracions" Type="Self.valoracions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kpis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="valoracions">
+              <PropertyRef Name="kpis_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_skills_llistes_skills">
+          <End Role="llistes_skills" Type="Self.llistes_skills" Multiplicity="1" />
+          <End Role="skills" Type="Self.skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="llistes_skills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="llistes_skills_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_missatges_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="missatges" Type="Self.missatges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="missatges">
+              <PropertyRef Name="id_usuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuaris_rols">
+          <End Role="rols" Type="Self.rols" Multiplicity="1" />
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rols">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuaris">
+              <PropertyRef Name="rols_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_valoracions_usuaris">
+          <End Role="usuaris" Type="Self.usuaris" Multiplicity="1" />
+          <End Role="valoracions" Type="Self.valoracions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuaris">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="valoracions">
+              <PropertyRef Name="usuari_valorat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="frase_aluEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="botchat" EntityType="Self.botchat" />
+          <EntitySet Name="cursos" EntityType="Self.cursos" />
+          <EntitySet Name="dias" EntityType="Self.dias" />
+          <EntitySet Name="formacion" EntityType="Self.formacion" />
+          <EntitySet Name="grups" EntityType="Self.grups" />
+          <EntitySet Name="grups_has_alumnes" EntityType="Self.grups_has_alumnes" />
+          <EntitySet Name="grups_has_docents" EntityType="Self.grups_has_docents" />
+          <EntitySet Name="grups_has_horaris" EntityType="Self.grups_has_horaris" />
+          <EntitySet Name="grups_has_llistes_skills" EntityType="Self.grups_has_llistes_skills" />
+          <EntitySet Name="horari" EntityType="Self.horari" />
+          <EntitySet Name="imatge_usuari" EntityType="Self.imatge_usuari" />
+          <EntitySet Name="kpis" EntityType="Self.kpis" />
+          <EntitySet Name="llistes_skills" EntityType="Self.llistes_skills" />
+          <EntitySet Name="missatges" EntityType="Self.missatges" />
+          <EntitySet Name="rols" EntityType="Self.rols" />
+          <EntitySet Name="skills" EntityType="Self.skills" />
+          <EntitySet Name="usuaris" EntityType="Self.usuaris" />
+          <EntitySet Name="valoracions" EntityType="Self.valoracions" />
+          <AssociationSet Name="FK_botchat_usuaris" Association="Self.FK_botchat_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="botchat" EntitySet="botchat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_alumnes_cursos" Association="Self.FK_grups_has_alumnes_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="grups_has_alumnes" EntitySet="grups_has_alumnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_docents_cursos" Association="Self.FK_grups_has_docents_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="grups_has_docents" EntitySet="grups_has_docents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_llistes_skills_cursos" Association="Self.FK_grups_has_llistes_skills_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="grups_has_llistes_skills" EntitySet="grups_has_llistes_skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_horaris_dias" Association="Self.FK_horaris_dias">
+            <End Role="dias" EntitySet="dias" />
+            <End Role="grups_has_horaris" EntitySet="grups_has_horaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuaris_formacion" Association="Self.FK_usuaris_formacion">
+            <End Role="formacion" EntitySet="formacion" />
+            <End Role="usuaris" EntitySet="usuaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_alumnes_grups" Association="Self.FK_grups_has_alumnes_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="grups_has_alumnes" EntitySet="grups_has_alumnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_docents_grups" Association="Self.FK_grups_has_docents_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="grups_has_docents" EntitySet="grups_has_docents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_llistes_skills_grups" Association="Self.FK_grups_has_llistes_skills_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="grups_has_llistes_skills" EntitySet="grups_has_llistes_skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_horaris_grups" Association="Self.FK_horaris_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="grups_has_horaris" EntitySet="grups_has_horaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_missatges_grups" Association="Self.FK_missatges_grups">
+            <End Role="grups" EntitySet="grups" />
+            <End Role="missatges" EntitySet="missatges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_alumnes_usuaris" Association="Self.FK_grups_has_alumnes_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="grups_has_alumnes" EntitySet="grups_has_alumnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_docents_usuaris" Association="Self.FK_grups_has_docents_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="grups_has_docents" EntitySet="grups_has_docents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_horaris_horari" Association="Self.FK_grups_has_horaris_horari">
+            <End Role="horari" EntitySet="horari" />
+            <End Role="grups_has_horaris" EntitySet="grups_has_horaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grups_has_llistes_skills_llistes_skills" Association="Self.FK_grups_has_llistes_skills_llistes_skills">
+            <End Role="llistes_skills" EntitySet="llistes_skills" />
+            <End Role="grups_has_llistes_skills" EntitySet="grups_has_llistes_skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imatge_usuari_usuaris" Association="Self.FK_imatge_usuari_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="imatge_usuari" EntitySet="imatge_usuari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kpis_skills" Association="Self.FK_kpis_skills">
+            <End Role="skills" EntitySet="skills" />
+            <End Role="kpis" EntitySet="kpis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_valoracions_kpis" Association="Self.FK_valoracions_kpis">
+            <End Role="kpis" EntitySet="kpis" />
+            <End Role="valoracions" EntitySet="valoracions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_skills_llistes_skills" Association="Self.FK_skills_llistes_skills">
+            <End Role="llistes_skills" EntitySet="llistes_skills" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_missatges_usuaris" Association="Self.FK_missatges_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="missatges" EntitySet="missatges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuaris_rols" Association="Self.FK_usuaris_rols">
+            <End Role="rols" EntitySet="rols" />
+            <End Role="usuaris" EntitySet="usuaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_valoracions_usuaris" Association="Self.FK_valoracions_usuaris">
+            <End Role="usuaris" EntitySet="usuaris" />
+            <End Role="valoracions" EntitySet="valoracions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="frase_aluModelStoreContainer" CdmEntityContainer="frase_aluEntities">
+          <EntitySetMapping Name="botchat">
+            <EntityTypeMapping TypeName="frase_aluModel.botchat">
+              <MappingFragment StoreEntitySet="botchat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="request" ColumnName="request" />
+                <ScalarProperty Name="id_usuari" ColumnName="id_usuari" />
+                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+                <ScalarProperty Name="actiu" ColumnName="actiu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cursos">
+            <EntityTypeMapping TypeName="frase_aluModel.cursos">
+              <MappingFragment StoreEntitySet="cursos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="curs_inici" ColumnName="curs_inici" />
+                <ScalarProperty Name="curs_fi" ColumnName="curs_fi" />
+                <ScalarProperty Name="actiu" ColumnName="actiu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dias">
+            <EntityTypeMapping TypeName="frase_aluModel.dias">
+              <MappingFragment StoreEntitySet="dias">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="inici" ColumnName="inici" />
+                <ScalarProperty Name="fi" ColumnName="fi" />
+                <ScalarProperty Name="tasca" ColumnName="tasca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="formacion">
+            <EntityTypeMapping TypeName="frase_aluModel.formacion">
+              <MappingFragment StoreEntitySet="formacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grups">
+            <EntityTypeMapping TypeName="frase_aluModel.grups">
+              <MappingFragment StoreEntitySet="grups">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grups_has_alumnes">
+            <EntityTypeMapping TypeName="frase_aluModel.grups_has_alumnes">
+              <MappingFragment StoreEntitySet="grups_has_alumnes">
+                <ScalarProperty Name="grups_id" ColumnName="grups_id" />
+                <ScalarProperty Name="usuaris_id" ColumnName="usuaris_id" />
+                <ScalarProperty Name="curs_id" ColumnName="curs_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grups_has_docents">
+            <EntityTypeMapping TypeName="frase_aluModel.grups_has_docents">
+              <MappingFragment StoreEntitySet="grups_has_docents">
+                <ScalarProperty Name="grups_id" ColumnName="grups_id" />
+                <ScalarProperty Name="usuaris_id" ColumnName="usuaris_id" />
+                <ScalarProperty Name="curs_id" ColumnName="curs_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grups_has_horaris">
+            <EntityTypeMapping TypeName="frase_aluModel.grups_has_horaris">
+              <MappingFragment StoreEntitySet="grups_has_horaris">
+                <ScalarProperty Name="id_grups" ColumnName="id_grups" />
+                <ScalarProperty Name="id_horari" ColumnName="id_horari" />
+                <ScalarProperty Name="id_dias" ColumnName="id_dias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grups_has_llistes_skills">
+            <EntityTypeMapping TypeName="frase_aluModel.grups_has_llistes_skills">
+              <MappingFragment StoreEntitySet="grups_has_llistes_skills">
+                <ScalarProperty Name="grups_id" ColumnName="grups_id" />
+                <ScalarProperty Name="llistes_skills_id" ColumnName="llistes_skills_id" />
+                <ScalarProperty Name="curs_id" ColumnName="curs_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horari">
+            <EntityTypeMapping TypeName="frase_aluModel.horari">
+              <MappingFragment StoreEntitySet="horari">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imatge_usuari">
+            <EntityTypeMapping TypeName="frase_aluModel.imatge_usuari">
+              <MappingFragment StoreEntitySet="imatge_usuari">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_usuari" ColumnName="id_usuari" />
+                <ScalarProperty Name="imatge_nom" ColumnName="imatge_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kpis">
+            <EntityTypeMapping TypeName="frase_aluModel.kpis">
+              <MappingFragment StoreEntitySet="kpis">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="skills_id" ColumnName="skills_id" />
+                <ScalarProperty Name="actiu" ColumnName="actiu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="llistes_skills">
+            <EntityTypeMapping TypeName="frase_aluModel.llistes_skills">
+              <MappingFragment StoreEntitySet="llistes_skills">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="actiu" ColumnName="actiu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="missatges">
+            <EntityTypeMapping TypeName="frase_aluModel.missatges">
+              <MappingFragment StoreEntitySet="missatges">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="asumpte" ColumnName="asumpte" />
+                <ScalarProperty Name="cos" ColumnName="cos" />
+                <ScalarProperty Name="id_usuari" ColumnName="id_usuari" />
+                <ScalarProperty Name="id_grup" ColumnName="id_grup" />
+                <ScalarProperty Name="data" ColumnName="data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rols">
+            <EntityTypeMapping TypeName="frase_aluModel.rols">
+              <MappingFragment StoreEntitySet="rols">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="actiu" ColumnName="actiu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="skills">
+            <EntityTypeMapping TypeName="frase_aluModel.skills">
+              <MappingFragment StoreEntitySet="skills">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="llistes_skills_id" ColumnName="llistes_skills_id" />
+                <ScalarProperty Name="actiu" ColumnName="actiu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuaris">
+            <EntityTypeMapping TypeName="frase_aluModel.usuaris">
+              <MappingFragment StoreEntitySet="usuaris">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="rols_id" ColumnName="rols_id" />
+                <ScalarProperty Name="actiu" ColumnName="actiu" />
+                <ScalarProperty Name="correu" ColumnName="correu" />
+                <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+                <ScalarProperty Name="any_naixement" ColumnName="any_naixement" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="id_formacio" ColumnName="id_formacio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="valoracions">
+            <EntityTypeMapping TypeName="frase_aluModel.valoracions">
+              <MappingFragment StoreEntitySet="valoracions">
+                <ScalarProperty Name="kpis_id" ColumnName="kpis_id" />
+                <ScalarProperty Name="usuari_valorat_id" ColumnName="usuari_valorat_id" />
+                <ScalarProperty Name="usuari_pp_id" ColumnName="usuari_pp_id" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="nota" ColumnName="nota" />
+                <ScalarProperty Name="observacions" ColumnName="observacions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
